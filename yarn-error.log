@@ -1,0 +1,71 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
+
+PATH: 
+  C:\Program Files\PowerShell\7;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\CheckPoint\Endpoint Security\Endpoint Common\bin;C:\Program Files (x86)\GitExtensions\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Users\BaigildinIR.UFARN-I\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\PuTTY\;C:\Program Files\PowerShell\7\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\BaigildinIR.UFARN-I\AppData\Local\Microsoft\WindowsApps;C:\Users\BaigildinIR.UFARN-I\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\BaigildinIR.UFARN-I\AppData\Local\Yarn\bin;C:\Users\BaigildinIR.UFARN-I\.dotnet\tools;C:\Program Files\Azure Data Studio\bin;C:\Users\BaigildinIR.UFARN-I\AppData\Roaming\npm;C:\Users\BaigildinIR.UFARN-I\AppData\Roaming\nvm;C:\Program Files\nodejs;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.20.2
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@angular%2fanimations: tunneling socket could not be established, cause=connect ETIMEDOUT 10.32.4.34:8080
+      at ClientRequest.onError (C:\Program Files (x86)\Yarn\lib\cli.js:152376:17)
+      at Object.onceWrapper (node:events:628:26)
+      at ClientRequest.emit (node:events:513:28)
+      at Socket.socketErrorListener (node:_http_client:494:9)
+      at Socket.emit (node:events:513:28)
+      at emitErrorNT (node:internal/streams/destroy:157:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "converter",
+    "version": "0.0.0",
+    "scripts": {
+      "ng": "ng",
+      "start": "ng serve",
+      "build": "ng build",
+      "watch": "ng build --watch --configuration development",
+      "test": "ng test"
+    },
+    "private": true,
+    "dependencies": {
+      "@angular/animations": "^16.1.0",
+      "@angular/common": "^16.1.0",
+      "@angular/compiler": "^16.1.0",
+      "@angular/core": "^16.1.0",
+      "@angular/forms": "^16.1.0",
+      "@angular/platform-browser": "^16.1.0",
+      "@angular/platform-browser-dynamic": "^16.1.0",
+      "@angular/router": "^16.1.0",
+      "rxjs": "~7.8.0",
+      "tslib": "^2.3.0",
+      "zone.js": "~0.13.0"
+    },
+    "devDependencies": {
+      "@angular-devkit/build-angular": "^16.1.0",
+      "@angular/cli": "~16.1.0",
+      "@angular/compiler-cli": "^16.1.0",
+      "@types/jasmine": "~4.3.0",
+      "jasmine-core": "~4.6.0",
+      "karma": "~6.4.0",
+      "karma-chrome-launcher": "~3.2.0",
+      "karma-coverage": "~2.2.0",
+      "karma-jasmine": "~5.1.0",
+      "karma-jasmine-html-reporter": "~2.1.0",
+      "typescript": "~5.1.3"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

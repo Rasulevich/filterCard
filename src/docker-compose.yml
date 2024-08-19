@@ -1,0 +1,8 @@
+version: '3'
+services:
+  angular:
+    build: .
+    environment:
+      - API_URL=${API_URL}
+    ports:
+      - "4200:4200"

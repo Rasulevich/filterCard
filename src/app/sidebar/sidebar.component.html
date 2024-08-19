@@ -1,0 +1,20 @@
+<mat-drawer-container>
+    <mat-drawer mode="side" opened class="side">
+        <mat-nav-list>
+            <ul>
+                <li class="link" [style.backgroundColor]="isActive('dashboard') ? '#A2A9B1' : ''" (click)="active('dashboard')"><a routerLink="/dashboard" >Суперагент</a></li>
+                <div [style.backgroundColor]="isActive('settings') ? '#A2A9B1' : ''" (click)="active('settings')">
+                    <li class="link" (click)="toggleDropdown()" ><a routerLink="/settings" >Управление</a></li>
+                    <ul *ngIf="dropdownOpen">
+                        <li class="link_list"><a routerLink="/settings" >Карточка контрагента </a></li>
+                        <li class="link_list"><a routerLink="/settings" >Договоры контрагента </a></li>
+                    </ul>
+                </div>
+                <li class="link" [style.backgroundColor]="isActive('subagent') ? '#A2A9B1' : ''" (click)="active('subagent')"><a routerLink="/settings">Субагент</a></li>
+              </ul>
+          </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>  
+        <app-main></app-main>
+    </mat-drawer-content>
+</mat-drawer-container>

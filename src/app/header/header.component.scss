@@ -1,0 +1,22 @@
+.mat-toolbar {
+    justify-content: flex-end; 
+}
+  
+.mat-toolbar mat-icon {
+    font-size: 24px; 
+    order: 1px solid grey;
+    border-radius: 50%;
+    padding: 6px;
+    background-color: lightgrey;
+}
+
+.header_user {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.header_user span {
+    font-size: 14px;
+    line-height: 1.5;
+}

@@ -1,0 +1,32 @@
+.side {
+  width: 250px;
+  background-color: #666F78;
+}
+ul {
+  padding: 0;
+}
+.link {
+  color: white;
+  list-style-type: none;
+  padding: 30px 20px;
+  cursor: pointer;
+}
+
+.link ul {
+  padding-left: 0px;
+}
+.link_list {
+  list-style-type: none;
+  font-size: 14px;
+  padding: 10px 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.link:active {
+  background-color: '#A2A9B1';
+}
+
+.link_list:active {
+  text-decoration: underline;
+}

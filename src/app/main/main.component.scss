@@ -1,0 +1,37 @@
+.title {
+    margin-left: 30px;
+}
+
+.setting_buttons {
+    display: flex;
+    margin-left: 30px;
+}
+
+.setting_buttons button {
+    margin-right: 30px;
+}
+
+.filter_button {
+    margin-left: auto; 
+}
+
+.filter-button:active {
+    background-color: gray !important; 
+    color: white;     
+}
+
+.filter_container {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin: 30px;
+    padding: 30px;
+}
+
+.filter_form {
+    margin: 20px;
+    width: 300px;
+}
+
+.form_buttons button{
+    margin-left: 20px;
+}
