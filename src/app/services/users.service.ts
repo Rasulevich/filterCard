@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { UsersVm} from '../types/users.interfase';
+import { Page, UsersVm} from '../types/users.interfase';
 import { UsersApiService } from './users-api.service';
-import { BehaviorSubject, map, share } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 @Injectable({
@@ -13,19 +13,24 @@ export class UsersService {
 
   private subjectUsers = new BehaviorSubject<UsersVm[]>([]);
   private subjectFilteredUsers = new BehaviorSubject<UsersVm[]>([]);
+  private subjectPages = new Subject<Page>();
 
   public users$ = this.subjectUsers.asObservable();
   public filteredUsers$ = this.subjectFilteredUsers.asObservable();
+  public pages$ = this.subjectPages.asObservable();
 
   public loadUsers() {
     this.usersApi.getUsers()
       .pipe(
+        map((el) => {
+          this.subjectPages.next(el.page);
+          return el;
+        }),
         map((el) => el.data.map((data) => ({
           ...data,
           ...el.users.find(user => user.id === data.user_id) 
           || {}
         }))),
-        share()
       )
       .subscribe((newData) => {
         this.subjectUsers.next(newData as UsersVm[]);

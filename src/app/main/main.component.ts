@@ -10,10 +10,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { UsersVm } from '../types/users.interfase';
+import { Page, UsersVm } from '../types/users.interfase';
 import { FormsModule } from '@angular/forms';
 import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
-import {MatPaginator, MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from '../ui-toolkit/paginator.toolkit';
 
 @Component({
@@ -49,8 +49,7 @@ export class MainComponent implements OnInit{
 
   private readonly formBuilder = inject(FormBuilder);
   private readonly usersService = inject(UsersService);
-  public readonly users$ = this.usersService.users$;
-  public readonly filrteredUsers$ = this.usersService.filteredUsers$;
+  public pages: Page = { total: 0, current: 1, size: 10 };
 
   private localStore = inject(LocalStorageJwtService);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -72,11 +71,11 @@ export class MainComponent implements OnInit{
   }
 
   public onUnlock() {
-    this.users$.subscribe((data) =>this.dataSource.data = data);
+    this.usersService.users$.subscribe((data) =>this.dataSource.data = data);
   }
 
   public onLock() {
-    this.filrteredUsers$.subscribe((data) => this.dataSource.data = data);
+    this.usersService.filteredUsers$.subscribe((data) => this.dataSource.data = data);
   }
 
   public onFilter() {
@@ -91,7 +90,7 @@ export class MainComponent implements OnInit{
     }
     else if (this.filterForm) {
       this.usersService.filterUsers(user);
-      this.filrteredUsers$.subscribe((data) => this.dataSource.data = data);
+      this.usersService.filteredUsers$.subscribe((data) => this.dataSource.data = data);
     }
   }
 
@@ -104,9 +103,10 @@ export class MainComponent implements OnInit{
   ngOnInit(): void {
     const localStorageUsers = this.localStore.getItem();
     !localStorageUsers ? this.usersService.loadUsers() : this.usersService.loadUsersLocalStorage(JSON.parse(localStorageUsers));    
-    this.users$.subscribe((data) =>{
+    this.usersService.users$.subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
     })
+    this.usersService.pages$.subscribe((pages) => this.pages = pages)
   }
 }
