@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +13,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { UsersVm } from '../types/users.interfase';
 import { FormsModule } from '@angular/forms';
 import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
+import {MatPaginator, MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from '../ui-toolkit/paginator.toolkit';
 
 @Component({
   selector: 'app-main',
@@ -29,14 +31,18 @@ import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
     MatNativeDateModule,
     MatTableModule,
     FormsModule,
+    MatPaginatorModule
   ],
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl }
+  ],
 })
 export class MainComponent implements OnInit{
   public openFilter = false;
   public addUser = false;
-  dataSource: MatTableDataSource<UsersVm> = new MatTableDataSource();; 
+  public dataSource: MatTableDataSource<UsersVm> = new MatTableDataSource();
   public readonly columnsToDisplay: string[] = ['actions','checkbox','login','email', 'phone', 'roles', 'updatedAt', 'createdAt', 'status', 'ep'];
   public readonly statuses = ['ACTIVE', 'Not active'];
   public readonly roles = ['Администратор', 'Пользователь'];
@@ -47,6 +53,7 @@ export class MainComponent implements OnInit{
   public readonly filrteredUsers$ = this.usersService.filteredUsers$;
 
   private localStore = inject(LocalStorageJwtService);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public filterForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.min(3)]],
@@ -99,6 +106,7 @@ export class MainComponent implements OnInit{
     !localStorageUsers ? this.usersService.loadUsers() : this.usersService.loadUsersLocalStorage(JSON.parse(localStorageUsers));    
     this.users$.subscribe((data) =>{
       this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
     })
   }
 }

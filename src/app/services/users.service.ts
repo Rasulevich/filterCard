@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { UsersVm} from '../types/users.interfase';
 import { UsersApiService } from './users-api.service';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, share } from 'rxjs';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 @Injectable({
@@ -24,14 +24,16 @@ export class UsersService {
           ...data,
           ...el.users.find(user => user.id === data.user_id) 
           || {}
-        })))
+        }))),
+        share()
       )
       .subscribe((newData) => {
         this.subjectUsers.next(newData as UsersVm[]);
       });
   }
+
   public loadUsersLocalStorage(users: UsersVm[]) {
-    this.subjectUsers.next(users)
+    this.subjectUsers.next(users);
   }
   
   public addUser(newUser: UsersVm) {
